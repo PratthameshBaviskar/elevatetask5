@@ -1,0 +1,37 @@
+# ✅ Viva Questions – EDA (Titanic Dataset)
+
+### 1. What is EDA and why is it important?
+
+**Exploratory Data Analysis (EDA)** is the process of analyzing datasets to summarize their main characteristics, often using visual methods. It helps:
+- Understand the structure of data
+- Detect outliers, missing values, and anomalies
+- Identify patterns and relationships
+- Prepare for modeling by selecting features and transforming data appropriately
+
+### 2. Which plots do you use to check correlation?
+
+To check correlation between variables, we typically use:
+- **Heatmaps** (e.g., `sns.heatmap()`): Show correlation coefficients between numeric features.
+- **Pairplots** (e.g., `sns.pairplot()`): Show scatterplots between all variable pairs with distributions.
+
+### 3. How do you handle skewed data?
+
+Skewed data can be handled using:
+- **Logarithmic transformation**: `np.log1p(x)`
+- **Box-Cox transformation**: Using `scipy.stats.boxcox`
+- **Square root or cube root transformation**
+- **Winsorization**: Capping extreme values
+- For skewed categorical distributions, grouping rare categories may help.
+
+### 4. How to detect multicollinearity?
+
+Multicollinearity can be detected using:
+- **Correlation matrix**: High correlation (> 0.8) between independent variables may indicate multicollinearity.
+- **Variance Inflation Factor (VIF)**: VIF > 5 (or 10) suggests multicollinearity.
+
+```python
+from statsmodels.stats.outliers_influence import variance_inflation_factor
+
+vif = pd.DataFrame()
+vif["VIF"] = [variance_inflation_factor(X.values, i) for i in range(X.shape[1])]
+vif["Feature"] = X.columns
